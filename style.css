@@ -5,10 +5,8 @@
 body {
   height: 100vh;
   overflow: hidden;
-  background: linear-gradient(0deg, red 0%, green 100%);
   display: flex;
   flex-direction: column;
-  margin-right: 8%;
 }
 
 h1 {

@@ -6,14 +6,52 @@ const bad = ["./../images/pokemon.png"];
 const toxic = ["./../images/donald.png"];
 const good = [
   "./../images/carne.png",
-  "./../images/tomato-image.png",
+  "./../images/tomate.png",
   "./../images/cilantro.png",
+  "./../images/piment.png",
+  "./../images/oignon.png",
 ];
 let score = 0;
-let level = 1;
-let num = document.querySelector("#score");
 
-canvas.style.background = "#C9AA7F";
+let num = document.querySelector("#score");
+let timer = document.querySelector("#timer");
+let timeLeft = 15;
+
+// SET TIMER
+
+// function gameOver() {
+//   cancelInterval(timer);
+//   timer.shadowRoot();
+// }
+
+// function updateTimer() {
+//   timeLeft = timeLeft - 1;
+//   if (timeLeft >= 0) timer.html(timeLeft);
+//   else {
+//     gameOver();
+//   }
+// }
+
+// function start() {
+//   timer = setInterval(updateTimer, 1000);
+//   updateTimer();
+//   timer.hide();
+// }
+
+// MUSIC FOR TRUMP
+let soundBad = new Audio();
+soundBad.src = "./../sounds/trump.m4a";
+
+// MUSIC FOR GOOD
+let soundMore = new Audio();
+soundMore.src = "./../sounds/more.m4a";
+
+// MUSIC FOR ESCARGOT
+let soundLess = new Audio();
+soundLess.src = "./../sounds/less.m4a";
+
+// BACKGROUND
+canvas.style.background = "url('./../images/background1.png";
 
 // CREATE TACOS
 class Tacos {
@@ -44,16 +82,13 @@ class Tacos {
 
 const taco = new Tacos();
 
-// CREATE TOMATO
+// CREATE FOOD
 class Tomato {
   constructor() {
     this.isGood = Math.random() > 0.5;
     this.isToxic = this.isGood ? false : Math.random() > 0.8;
 
-    // this.fruitBottom = 470;
-    // this.fruitLeft = Math.floor(Math.random() * 1000);
     this.image = new Image();
-    // this.imageArray = this.isGood ? good : bad;
 
     if (this.isGood) {
       this.imageArray = good;
@@ -62,34 +97,23 @@ class Tomato {
     } else {
       this.imageArray = bad;
     }
-    console.log(this.isGood);
+
     this.image.src =
       this.imageArray[Math.floor(Math.random() * this.imageArray.length)];
     this.position = {
       x: Math.floor(Math.random() * canvas.width - 80),
       y: 0,
-      width: 50,
-      height: 50,
+      width: 65,
+      height: 65,
     };
   }
-  // infiniteTomato() {
-  //   setInterval(function () {
-  //     addTomato();
-  //     fallingTomato(this.tomatoArray[tomatoIndex]);
-  //     this.tomatoIndex++;
-  //   }, 2000);
-  // }
-  // addTomato() {
-  //   this.position.x = rando;
-  //   this.tomatoArray.push(this.position);
-  // }
+
   move() {
     this.position.y += 6;
     if (this.position.y > canvas.width) {
     }
   }
   draw() {
-    // this.tomatoArray.forEach(function () {
     ctx.drawImage(
       this.image,
       this.position.x,
@@ -97,30 +121,10 @@ class Tomato {
       this.position.width,
       this.position.height
     );
-
-    // });
   }
-  // generateFruit() {
-  //   this.x = Math.floor(Math.random() * 1000);
-  //   this.y = 460;
-  // }
 }
 
-// CREATE CLASS TO GENERATE FOOD
-
-// CREATE SCORE
-
-// let count = 0;
-// function Score() {
-//   let score = document.querySelector(".score");
-//   score.textContent = count;
-// }
-// function AddPoint(count) {
-//   score += count;
-// }
-// function LoosePoint(count) {
-//   score -= count;
-// }
+// MAKE MOVE TACO LEFT TO RIGHT
 
 const keys = {
   r: {
@@ -131,7 +135,7 @@ const keys = {
   },
 };
 
-// MAKE MOVE TACO LEFT TO RIGHT
+// BASE OF THE GAME // CONDITIONS
 
 let frame = 0;
 function animate() {
@@ -145,41 +149,37 @@ function animate() {
   for (let tomato of tomatoes) {
     tomato.move();
     tomato.draw();
-    console.log(tomato);
+
     if (
-      taco.x + 30 <= tomato.position.x + tomato.position.width &&
-      tomato.position.x <= taco.x - 30 + taco.width &&
+      taco.x + 40 <= tomato.position.x + tomato.position.width &&
+      tomato.position.x <= taco.x - 40 + taco.width &&
       taco.y + 40 <= tomato.position.y + tomato.position.height &&
       tomato.position.y <= taco.y + taco.height
     ) {
       if (tomato.isGood) {
         score++;
+        soundMore.play();
         num.textContent = score;
       } else {
         score--;
         num.textContent = score;
+        soundLess.play();
       }
 
       if (tomato.isToxic || score < 0) {
-        alert("you lose");
+        soundBad.play();
+        alert("Noooooooo! Baby taco is dead");
+        // gameOver();
       }
       tomatoes.splice(tomatoes.indexOf(tomato), 1);
-      console.log(score);
     }
-    // if (
-    //   taco.x < tomato.position.x + tomato.position.width / 2 &&
-    //   tomato.position.x <= taco.x + taco.width / 2 &&
-    //   taco.y + taco.height / 2 <= tomato.position.y + tomato.height &&
-    //   tomato.y <= taco.y + taco.height
-    // ) {
-    // }
   }
   frame++;
 
   if (keys.r.pressed && taco.x + taco.width <= canvas.width) {
-    taco.velocity.x = +9;
+    taco.velocity.x = +8;
   } else if (keys.l.pressed && taco.x >= 0) {
-    taco.velocity.x = -9;
+    taco.velocity.x = -8;
   } else {
     taco.velocity.x = 0;
   }
@@ -190,11 +190,9 @@ animate();
 addEventListener("keydown", ({ key }) => {
   switch (key) {
     case "ArrowRight":
-      console.log("right");
       keys.r.pressed = true;
       break;
     case "ArrowLeft":
-      console.log("left");
       keys.l.pressed = true;
       break;
     default:
@@ -205,67 +203,12 @@ addEventListener("keydown", ({ key }) => {
 addEventListener("keyup", ({ key }) => {
   switch (key) {
     case "ArrowRight":
-      console.log("right");
       keys.r.pressed = false;
       break;
     case "ArrowLeft":
-      console.log("left");
-
       keys.l.pressed = false;
       break;
     default:
       break;
   }
 });
-
-// MAKE ELEMENTS THAT COME RANDOMLY FROM UP
-// class Obstacle {
-//   constructor(canvas, ctx) {
-//     this.ctx = ctx;
-//     this.canvas = canvas;
-//     this.x = Math.floor(Math.random() * (this.canvas.width / 2)) + 20;
-//     this.width = Math.floor(Math.random() * (this.canvas.width / 2));
-//     this.height = 15;
-//     this.y = -20;
-//   }
-
-//   bottomEdge() {
-//     return this.y + this.height;
-//   }
-
-//   leftEdge() {
-//     return this.x;
-//   }
-//   rightEdge() {
-//     return this.x + this.width;
-//   }
-//   topEdge() {
-//     return this.y;
-//   }
-
-//   draw() {
-//     this.ctx.fillStyle = "red";
-//     this.ctx.fillRect(this.x, this.y, this.width, this.height);
-//   }
-
-//   move() {
-//     this.y += 4;
-//   }
-// }
-
-// this.intervalId = setInterval(() => {
-//   this.frames++;
-//   if (this.frames % 60 === 0) {
-//     this.obstacles.push(new Obstacle(this.canvas, this.ctx));
-//   }
-//   this.road.draw();
-//   this.road.move();
-//   this.car.draw();
-//   for (const obstacle of this.obstacles) {
-//     obstacle.draw();
-//     if (this.checkCollision(obstacle, this.car)) {
-//       this.stopGame();
-//     }
-//     obstacle.move();
-//   }
-// }, 1000 / 60);
