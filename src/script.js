@@ -3,19 +3,15 @@ const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
 const tomatoes = [];
 const bad = ["./../images/pokemon.png"];
+const toxic = ["./../images/donald.png"];
 const good = [
-  "./../images/carne.png",
-  "./../images/tomato-image.png",
-  "./../images/cilantro.png",
-  "./../images/carne.png",
-  "./../images/tomato-image.png",
-  "./../images/cilantro.png",
   "./../images/carne.png",
   "./../images/tomato-image.png",
   "./../images/cilantro.png",
 ];
 let score = 0;
 let level = 1;
+let num = document.querySelector("#score");
 
 canvas.style.background = "#C9AA7F";
 
@@ -25,8 +21,8 @@ class Tacos {
     this.image = new Image();
     this.image.src = "./../images/tacos-image.png";
 
-    this.width = 90;
-    this.height = 120;
+    this.width = 80;
+    this.height = 100;
     this.velocity = {
       x: 0,
       y: 0,
@@ -52,16 +48,25 @@ const taco = new Tacos();
 class Tomato {
   constructor() {
     this.isGood = Math.random() > 0.5;
+    this.isToxic = this.isGood ? false : Math.random() > 0.8;
 
     // this.fruitBottom = 470;
     // this.fruitLeft = Math.floor(Math.random() * 1000);
     this.image = new Image();
+    // this.imageArray = this.isGood ? good : bad;
 
-    this.imageArray = this.isGood ? good : bad;
+    if (this.isGood) {
+      this.imageArray = good;
+    } else if (this.isToxic) {
+      this.imageArray = toxic;
+    } else {
+      this.imageArray = bad;
+    }
+    console.log(this.isGood);
     this.image.src =
       this.imageArray[Math.floor(Math.random() * this.imageArray.length)];
     this.position = {
-      x: Math.floor(Math.random() * canvas.width - 50),
+      x: Math.floor(Math.random() * canvas.width - 80),
       y: 0,
       width: 50,
       height: 50,
@@ -136,9 +141,31 @@ function animate() {
     tomatoes.push(new Tomato());
   }
   taco.update();
+
   for (let tomato of tomatoes) {
-    tomato.draw();
     tomato.move();
+    tomato.draw();
+    console.log(tomato);
+    if (
+      taco.x + 30 <= tomato.position.x + tomato.position.width &&
+      tomato.position.x <= taco.x - 30 + taco.width &&
+      taco.y + 40 <= tomato.position.y + tomato.position.height &&
+      tomato.position.y <= taco.y + taco.height
+    ) {
+      if (tomato.isGood) {
+        score++;
+        num.textContent = score;
+      } else {
+        score--;
+        num.textContent = score;
+      }
+
+      if (tomato.isToxic || score < 0) {
+        alert("you lose");
+      }
+      tomatoes.splice(tomatoes.indexOf(tomato), 1);
+      console.log(score);
+    }
     // if (
     //   taco.x < tomato.position.x + tomato.position.width / 2 &&
     //   tomato.position.x <= taco.x + taco.width / 2 &&
