@@ -4,14 +4,14 @@ const ctx = canvas.getContext("2d");
 let tomatoes = [];
 let animationId = null;
 let intervalId = null;
-const bad = ["./../images/escargot.png"];
-const toxic = ["./../images/trump.png"];
+const bad = ["./images/escargot.png"];
+const toxic = ["./images/trump.png"];
 const good = [
-  "./../images/avocat.png",
-  "./../images/carne.png",
-  "./../images/oignon.png",
-  "./../images/piment.png",
-  "./../images/tomate.png",
+  "./images/avocat.png",
+  "./images/carne.png",
+  "./images/oignon.png",
+  "./images/piment.png",
+  "./images/tomate.png",
 ];
 let score = 0;
 let num = document.querySelector("#score");
@@ -83,24 +83,24 @@ function gameOver() {
 
 // MUSIC FOR TRUMP
 let soundBad = new Audio();
-soundBad.src = "./../sounds/trump.m4a";
+soundBad.src = "./sounds/trump.m4a";
 
 // MUSIC FOR GOOD
 let soundMore = new Audio();
-soundMore.src = "./../sounds/more.m4a";
+soundMore.src = "./sounds/more.m4a";
 
 // MUSIC FOR ESCARGOT
 let soundLess = new Audio();
-soundLess.src = "./../sounds/less.m4a";
+soundLess.src = "./sounds/less.m4a";
 
 // BACKGROUND
-canvas.style.background = "url('./../images/background1.png";
+canvas.style.background = "url('./images/background1.png";
 
 // CREATE TACOS
 class Tacos {
   constructor() {
     this.image = new Image();
-    this.image.src = "./../images/tacos-image.png";
+    this.image.src = "./images/tacos-image.png";
 
     this.width = 80;
     this.height = 100;
@@ -182,7 +182,6 @@ const keys = {
 
 let frame = 0;
 function animate() {
-  console.log("yeeee");
   animationId = requestAnimationFrame(animate);
 
   if (frame % 20 === 0) {
@@ -205,6 +204,8 @@ function animate() {
         soundMore.play();
         num.textContent = score;
         if (score === 10) {
+          clearInterval(intervalId);
+          cancelAnimationFrame(animationId);
           winGame();
         }
       } else {
@@ -213,9 +214,8 @@ function animate() {
         num.textContent = score;
       }
 
-      if (tomato.isToxic || score < 0) {
+      if (tomato.isToxic || (score < 0 && score !== 10)) {
         soundBad.play();
-        console.log("nul");
         clearInterval(intervalId);
         cancelAnimationFrame(animationId);
         gameOver();
