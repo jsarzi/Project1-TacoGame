@@ -1,8 +1,9 @@
 // DISPLAY CANVAS
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
-const tomatoes = [];
+let tomatoes = [];
 let animationId = null;
+let intervalId = null;
 const bad = ["./../images/escargot.png"];
 const toxic = ["./../images/trump.png"];
 const good = [
@@ -12,20 +13,32 @@ const good = [
   "./../images/piment.png",
   "./../images/tomate.png",
 ];
+let score = 0;
+let num = document.querySelector("#score");
 
 // START THE GAME
-
-let start = document.querySelector(".start");
-start.addEventListener("click", () => {
+function init() {
   animate();
   const fiveMinutes = 60 * 5,
     display = document.querySelector("#time");
   startTimer(fiveMinutes, display);
-});
-// SCORE
-let score = 0;
+  score = 0;
+  tomatoes = [];
+  num.textContent = score;
+}
 
-let num = document.querySelector("#score");
+let startAgain = document.querySelector("#playAgainButton");
+startAgain.addEventListener("click", () => {
+  let modal = document.querySelector("#modal");
+  console.log(modal);
+  modal.close();
+  init();
+});
+
+let start = document.querySelector(".start");
+start.addEventListener("click", () => {
+  init();
+});
 
 // SET TIMER
 
@@ -33,7 +46,7 @@ function startTimer(duration, display) {
   let timer = duration,
     minutes,
     seconds;
-  setInterval(function () {
+  intervalId = setInterval(function () {
     minutes = parseInt(timer / 60, 10);
     seconds = parseInt(timer % 60, 10);
 
@@ -57,8 +70,8 @@ function startTimer(duration, display) {
 
 // DISPLAY WIN
 function winGame() {
-  let win = document.querySelector(".win");
-  win.classList.remove("hidden");
+  let win = document.querySelector("#modal1");
+  win.showModal();
 }
 
 // GAME OVER
@@ -203,6 +216,7 @@ function animate() {
       if (tomato.isToxic || score < 0) {
         soundBad.play();
         console.log("nul");
+        clearInterval(intervalId);
         cancelAnimationFrame(animationId);
         gameOver();
       }
