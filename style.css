@@ -1,18 +1,100 @@
-#canvas {
+/* @import url(//db.onlinewebfonts.com/c/4e9d54aff52203ae1a7ce4b1482e2986?family=Mexican+fiesta);
+
+@font-face {
+  font-family: "Mexican fiesta";
+  src: url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.eot");
+  src: url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.svg#Mexican fiesta")
+      format("svg"); */
+/* } */
+* #canvas {
   box-shadow: 10px 10px 20px black;
   margin-left: 8%;
 }
 body {
   height: 100vh;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
+  background: linear-gradient(0.25turn, #195e30, #ebf8e1, #b61c1c);
+
+  font-size: 20px;
 }
 
+/* MAIN PAGE */
+
+.rule {
+  font-size: 16px;
+  text-align: center;
+}
+.rule a {
+  background-color: rgb(94, 18, 18);
+  border-radius: 5px;
+  border: rgb(109, 20, 20);
+  color: #ebf8e1;
+  font-weight: 700;
+  text-decoration: none;
+}
+.rule a:hover {
+  background: #195e1c;
+  color: rgb(245, 247, 244);
+}
+.rule h1 {
+  font-size: 20px;
+}
+.MainImg {
+  display: flex;
+  margin-left: 40%;
+}
+.MainImg img {
+  width: 8%;
+}
+.Img {
+  width: 8%;
+}
+.Img1 {
+  width: 6%;
+}
+/* INDEX PAGE */
 h1 {
   text-align: center;
 }
 
 header {
   height: 10%;
+}
+
+.hidden {
+  display: none;
+}
+
+.lost {
+  position: absolute;
+  height: 500px;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("./images/win.png");
+  text-align: center;
+}
+
+.lost h2 {
+  color: #195e30;
+}
+
+.win {
+  position: absolute;
+  height: 500px;
+  background-color: rgb(241, 241, 241);
+}
+
+dialog::backdrop {
+  backdrop-filter: blur(3px);
 }

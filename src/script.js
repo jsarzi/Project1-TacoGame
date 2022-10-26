@@ -2,41 +2,71 @@
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
 const tomatoes = [];
-const bad = ["./../images/pokemon.png"];
-const toxic = ["./../images/donald.png"];
+let animationId = null;
+const bad = ["./../images/escargot.png"];
+const toxic = ["./../images/trump.png"];
 const good = [
+  "./../images/avocat.png",
   "./../images/carne.png",
-  "./../images/tomate.png",
-  "./../images/cilantro.png",
-  "./../images/piment.png",
   "./../images/oignon.png",
+  "./../images/piment.png",
+  "./../images/tomate.png",
 ];
+
+// START THE GAME
+
+let start = document.querySelector(".start");
+start.addEventListener("click", () => {
+  animate();
+  const fiveMinutes = 60 * 5,
+    display = document.querySelector("#time");
+  startTimer(fiveMinutes, display);
+});
+// SCORE
 let score = 0;
 
 let num = document.querySelector("#score");
-let timer = document.querySelector("#timer");
-let timeLeft = 15;
 
 // SET TIMER
 
-// function gameOver() {
-//   cancelInterval(timer);
-//   timer.shadowRoot();
-// }
+function startTimer(duration, display) {
+  let timer = duration,
+    minutes,
+    seconds;
+  setInterval(function () {
+    minutes = parseInt(timer / 60, 10);
+    seconds = parseInt(timer % 60, 10);
 
-// function updateTimer() {
-//   timeLeft = timeLeft - 1;
-//   if (timeLeft >= 0) timer.html(timeLeft);
-//   else {
-//     gameOver();
-//   }
-// }
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
 
-// function start() {
-//   timer = setInterval(updateTimer, 1000);
-//   updateTimer();
-//   timer.hide();
-// }
+    display.textContent = minutes + ":" + seconds;
+
+    if (--timer < 0) {
+      timer = duration;
+      gameOver();
+    }
+  }, 100);
+}
+
+// window.onload = function () {
+//   // const fiveMinutes = 60 * 5,
+//   //   display = document.querySelector("#time");
+//   // startTimer(fiveMinutes, display);
+// };
+
+// DISPLAY WIN
+function winGame() {
+  let win = document.querySelector(".win");
+  win.classList.remove("hidden");
+}
+
+// GAME OVER
+function gameOver() {
+  let lost = document.querySelector("#modal");
+  // lost.classList.remove("hidden");
+  lost.showModal();
+}
 
 // MUSIC FOR TRUMP
 let soundBad = new Audio();
@@ -139,7 +169,8 @@ const keys = {
 
 let frame = 0;
 function animate() {
-  requestAnimationFrame(animate);
+  console.log("yeeee");
+  animationId = requestAnimationFrame(animate);
 
   if (frame % 20 === 0) {
     tomatoes.push(new Tomato());
@@ -160,16 +191,20 @@ function animate() {
         score++;
         soundMore.play();
         num.textContent = score;
+        if (score === 10) {
+          winGame();
+        }
       } else {
         score--;
-        num.textContent = score;
         soundLess.play();
+        num.textContent = score;
       }
 
       if (tomato.isToxic || score < 0) {
         soundBad.play();
-        alert("Noooooooo! Baby taco is dead");
-        // gameOver();
+        console.log("nul");
+        cancelAnimationFrame(animationId);
+        gameOver();
       }
       tomatoes.splice(tomatoes.indexOf(tomato), 1);
     }
@@ -185,7 +220,7 @@ function animate() {
   }
 }
 
-animate();
+// ADD EVENT LISTENER
 
 addEventListener("keydown", ({ key }) => {
   switch (key) {

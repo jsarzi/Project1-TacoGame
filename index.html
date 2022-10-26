@@ -5,6 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./style.css" />
+    <!-- <link href="//db.onlinewebfonts.com/c/4e9d54aff52203ae1a7ce4b1482e2986?family=Mexican+fiesta" rel="stylesheet" type="text/css"/> -->
+    
     <script src="src/script.js" type="module"></script>
 
     <title>Tacos Game</title>
@@ -15,11 +17,28 @@
       <div></div>
       <p>Score:<span id="score">0</span></p>
       <p id="level">Level:<span>1</span></p>
-      <p>You have: <span id="timer">0</span> seconds remaining!</p>
-      <button id="playAgainButton" onclick="start()">PLAY AGAIN</button>
+      <button class="start">START</button>
+      <p><span id="time">05:00</span></p>
+      
+      
     </div>
     </header>
+    <section class="lost hidden">
+      <h2>You are Fired!!!</h2>
+      <p>You didn't manage to save baby taco... for your fault he is dead in the mexicain desert...</p>
+      <button>TRY AGAIN</button>
+    </section>
 
-    <canvas id="canvas" width="800" height=390"></canvas>
+    <section class="win hidden">
+      <h2>Yeah baby taco is safe</h2>
+      <p>Go to the next level to help him in his journey</p>
+      <button>NEXT LEVEL</button>
+    </section>
+
+    <canvas id="canvas" width="800" height="390"></canvas>
+    <dialog id="modal">
+      <h2>You're fired !</h2>
+      <button id="playAgainButton" >PLAY AGAIN</button>
+    </dialog>
   </body>
 </html>
