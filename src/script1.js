@@ -6,14 +6,14 @@ let tomatoes = [];
 let animationId = null;
 let intervalId = null;
 let score = 0;
-const bad = ["/images/escargot.png"];
-const toxic = ["/images/serpent.png"];
+const bad = ["images/escargot.png"];
+const toxic = ["images/serpent.png"];
 const good = [
-  "/images/oignon.png",
-  "/images/piment.png",
-  "/images/tomate.png",
-  "/images/carne.png",
-  "/images/avocat.png",
+  "images/oignon.png",
+  "images/piment.png",
+  "images/tomate.png",
+  "images/carne.png",
+  "images/avocat.png",
 ];
 
 // THE GAME
@@ -79,15 +79,15 @@ function gameOver() {
 
 // MUSIC FOR TRUMP
 let soundBad = new Audio();
-soundBad.src = "./sounds/trump.m4a";
+soundBad.src = "sounds/trump.m4a";
 
 // MUSIC FOR GOOD
 let soundMore = new Audio();
-soundMore.src = "./sounds/more.m4a";
+soundMore.src = "sounds/more.m4a";
 
 // MUSIC FOR ESCARGOT
 let soundLess = new Audio();
-soundLess.src = "./sounds/less.m4a";
+soundLess.src = "sounds/less.m4a";
 
 // BACKGROUND
 canvas.style.background = "url('images/background1.png')";
@@ -96,7 +96,7 @@ canvas.style.background = "url('images/background1.png')";
 class Tacos {
   constructor() {
     this.image = new Image();
-    this.image.src = "./images/tacos-image.png";
+    this.image.src = "images/tacos-image.png";
 
     this.width = 80;
     this.height = 100;
