@@ -1,9 +1,11 @@
 // DISPLAY CANVAS
 const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext("2d");
+let num = document.querySelector("#score");
 let tomatoes = [];
 let animationId = null;
 let intervalId = null;
+let score = 0;
 const bad = ["./images/escargot.png"];
 const toxic = ["./images/trump.png"];
 const good = [
@@ -13,10 +15,8 @@ const good = [
   "./images/piment.png",
   "./images/tomate.png",
 ];
-let score = 0;
-let num = document.querySelector("#score");
 
-// START THE GAME
+// THE GAME
 function init() {
   animate();
   const fiveMinutes = 60 * 5,
@@ -27,6 +27,7 @@ function init() {
   num.textContent = score;
 }
 
+// START AGAIN
 let startAgain = document.querySelector("#playAgainButton");
 startAgain.addEventListener("click", () => {
   let modal = document.querySelector("#modal");
@@ -35,6 +36,7 @@ startAgain.addEventListener("click", () => {
   init();
 });
 
+// START
 let start = document.querySelector(".start");
 start.addEventListener("click", () => {
   init();
@@ -61,12 +63,6 @@ function startTimer(duration, display) {
     }
   }, 100);
 }
-
-// window.onload = function () {
-//   // const fiveMinutes = 60 * 5,
-//   //   display = document.querySelector("#time");
-//   // startTimer(fiveMinutes, display);
-// };
 
 // DISPLAY WIN
 function winGame() {

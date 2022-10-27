@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./style.css" />
+    <!-- <link href="//db.onlinewebfonts.com/c/4e9d54aff52203ae1a7ce4b1482e2986?family=Mexican+fiesta" rel="stylesheet" type="text/css"/> -->
+    
+    <script src="src/script.js" type="module"></script>
+
+    <title>Tacos Game</title>
+  </head>
+  <body>
+    <header>
+      <h1>HELP THE TACO GAME</h1>
+      <div></div>
+      <p>Score:<span id="score">0</span></p>
+      <p id="level">Level:<span>1</span></p>
+      <button class="start">START</button>
+      <p><span id="time">05:00</span></p>
+      
+      
+    </div>
+    </header>
+    
+    <canvas id="canvas" width="800" height="390"></canvas>
+    <dialog id="modal">
+      <h2>You're fired !</h2>
+      <button id="playAgainButton">PLAY AGAIN</button>
+    </dialog>
+    <dialog id='modal1'>
+      <h2>Hello you win</h2>
+      <a href="/page2.html" id="playLevelTwo">NEXT LEVEL</a>
+    </dialog>
+  </body>
+</html>
