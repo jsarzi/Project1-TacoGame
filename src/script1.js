@@ -6,10 +6,15 @@ let tomatoes = [];
 let animationId = null;
 let intervalId = null;
 let score = 0;
-
-const bad = ["/images/tequila.png", "/images/shot.png"];
-const toxic = ["/images/coyote.png"];
-const good = ["/images/cash.png", "/images/money.png", "/images/save.png"];
+const bad = ["/images/escargot.png"];
+const toxic = ["/images/serpent.png"];
+const good = [
+  "/images/oignon.png",
+  "/images/piment.png",
+  "/images/tomate.png",
+  "/images/carne.png",
+  "/images/avocat.png",
+];
 
 // THE GAME
 function init() {
@@ -85,7 +90,7 @@ let soundLess = new Audio();
 soundLess.src = "./sounds/less.m4a";
 
 // BACKGROUND
-canvas.style.background = "url('/images/mexico.png')";
+canvas.style.background = "url('/images/background1.png')";
 
 // CREATE TACOS
 class Tacos {
@@ -137,13 +142,13 @@ class Tomato {
     this.position = {
       x: Math.floor(Math.random() * canvas.width - 80),
       y: 0,
-      width: 60,
-      height: 100,
+      width: 70,
+      height: 70,
     };
   }
 
   move() {
-    this.position.y += 4;
+    this.position.y += 6;
     if (this.position.y > canvas.width) {
     }
   }

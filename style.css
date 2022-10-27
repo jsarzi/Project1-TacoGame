@@ -50,16 +50,30 @@ body {
 }
 .MainImg {
   display: flex;
-  margin-left: 40%;
+  margin-left: 45%;
 }
 .MainImg img {
   width: 8%;
 }
+
+.MainImg1 img {
+  width: 5%;
+}
 .Img {
-  width: 8%;
+  width: 4%;
+}
+.escargot {
+  width: 6%;
+}
+.echelle {
+  padding-left: 2%;
 }
 .Img1 {
-  width: 6%;
+  width: 8%;
+}
+
+.Img2 {
+  width: 8%;
 }
 /* INDEX PAGE */
 h1 {
