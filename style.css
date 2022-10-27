@@ -1,24 +1,9 @@
-/* @import url(//db.onlinewebfonts.com/c/4e9d54aff52203ae1a7ce4b1482e2986?family=Mexican+fiesta);
-
-@font-face {
-  font-family: "Mexican fiesta";
-  src: url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.eot");
-  src: url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.eot?#iefix")
-      format("embedded-opentype"),
-    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.woff2")
-      format("woff2"),
-    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.woff")
-      format("woff"),
-    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.ttf")
-      format("truetype"),
-    url("//db.onlinewebfonts.com/t/4e9d54aff52203ae1a7ce4b1482e2986.svg#Mexican fiesta")
-      format("svg"); */
-/* } */
 * #canvas {
   box-shadow: 10px 10px 20px black;
   margin-left: 8%;
 }
 body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -86,4 +71,30 @@ header {
 
 dialog::backdrop {
   backdrop-filter: blur(3px);
+}
+
+#modal1 {
+  background-color: #1b6935;
+  box-shadow: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 20px;
+  width: 300px;
+}
+
+#modal1 a {
+  text-decoration: none;
+  color: black;
+}
+
+#modal {
+  background-color: #8b2929;
+  box-shadow: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 20px;
+  width: 300px;
+}
+#modal button {
+  all: unset;
+  text-decoration: none;
+  color: black;
 }
