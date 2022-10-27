@@ -90,7 +90,7 @@ let soundLess = new Audio();
 soundLess.src = "./sounds/less.m4a";
 
 // BACKGROUND
-canvas.style.background = "url('/images/background1.png')";
+canvas.style.background = "url('images/background1.png')";
 
 // CREATE TACOS
 class Tacos {
